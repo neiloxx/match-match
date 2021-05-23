@@ -1,0 +1,123 @@
+.header {
+  max-width: 140rem;
+  width: 100%;
+  height: 6.4rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.header__title {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.nav {
+  max-width: 28.8rem;
+  width: 100%;
+  height: 100%;
+  margin-left: 11%;
+  margin-right: auto;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+  height: 100%;
+  align-items: center;
+}
+
+.list__item {
+  max-width: 9.6rem;
+  width: 100%;
+  height: 100%;
+}
+
+.list__item,
+.link_text {
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  text-transform: capitalize;
+  letter-spacing: 0.04rem;
+  text-align: center;
+}
+
+.list__item-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #e5e5e5;
+  text-decoration: none;
+  position: relative;
+  transition: background-color ease-in 0.2s;
+}
+
+.link_image {
+  width: 2rem;
+  height: 2rem;
+  background-color: #fff;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.list__item-link.about .link_image {
+  background-image: url("../../../assets/icons/question.svg");
+}
+
+.list__item-link.score .link_image {
+  background-image: url("../../../assets/icons/star.svg");
+}
+
+.list__item-link.settings .link_image {
+  background-image: url("../../../assets/icons/gear.svg");
+}
+
+.list__item-link:hover,
+.list__item-link.active {
+  background-color: #1e88e5;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 0 1.7rem;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  letter-spacing: 0.125rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #2196f3;
+  height: 3.6rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  transition: background-color ease-in 0.2s;
+  margin: 0 1rem;
+  text-align: center;
+  min-width: 13.5rem;
+}
+
+.registration-link {
+  min-width: 13.5rem;
+}
+
+.start-link,
+.stop-link {
+  min-width: 5rem;
+}
+
+.link:hover,
+.link.active {
+  color: #fff;
+  background-color: #1e88e5;
+}
+
+.link:active {
+  color: #ddd;
+}

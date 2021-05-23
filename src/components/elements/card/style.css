@@ -1,0 +1,57 @@
+.card {
+  position: relative;
+  max-width: 16.8rem;
+  width: 100%;
+  max-height: 16.8rem;
+  height: 100%;
+  cursor: pointer;
+  box-shadow: 0 1px 5px 0 #00000085;
+  perspective: 100rem;
+  border-radius: 1rem;
+  transition: transform ease-in .2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 1px 5px 0 #000000f7;
+}
+
+.card__back,
+.card__front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: inherit;
+  transition: 0.5s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.card__back {
+  transform: rotateY(180deg);
+  background-image: url("../../../../public/assets/images/card-back.jpg");
+}
+
+.card.flipped .card__front {
+  transform: rotateY(180deg);
+}
+
+.card.flipped .card__back {
+  transform: rotateY(360deg);
+}
+
+.card.wrong {
+  filter: sepia(71%) saturate(250%) hue-rotate(314deg) brightness(88%) contrast(97%);
+}
+
+.card.wrong.flipped {
+  filter: none;
+}
+
+.card.right {
+  filter: sepia(97%) saturate(250%) hue-rotate(70deg) brightness(99%) contrast(95%);
+}

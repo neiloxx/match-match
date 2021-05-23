@@ -1,0 +1,7 @@
+.game__timer {
+  font-weight: 500;
+  font-size: 3.6rem;
+  line-height: 3rem;
+  color: #999;
+  cursor: default;
+}
