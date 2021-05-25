@@ -4,4 +4,12 @@
   line-height: 3rem;
   color: #999;
   cursor: default;
+  width: 25.6rem;
+  height: 6.4rem;
+  background-color: #ffffff;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin: auto;
+  align-self: center;
 }

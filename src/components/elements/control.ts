@@ -29,7 +29,7 @@ export default class Control {
     }
   }
 
-  getNode() {
+  public getNode() {
     return this.node;
   }
 }

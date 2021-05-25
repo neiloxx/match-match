@@ -5,6 +5,7 @@ import { shuffleArray } from '../../../utils/array';
 import images from '../../../consts/images.json';
 import delay from '../../../shared/delay';
 import store from '../../../store/game-store';
+import settingsStore from '../../../store/settings-store';
 
 const FLIP_DELAY = 1000;
 
@@ -23,13 +24,14 @@ export default class CardsField extends Control {
 
   correctTries = 0;
 
-  public quantity = 12; // This number we should get from settings
+  public quantity = settingsStore.getDifficulty(); // This number we should get from settings
 
   constructor(parent: HTMLElement) {
     super(parent, 'div', 'card__field');
-    this.category = 'lotr';
+    this.category = settingsStore.getGameCards();
     this.images = images[this.category];
     this.addCards();
+    this.changeSize();
   }
 
   clear() {
@@ -54,7 +56,7 @@ export default class CardsField extends Control {
       card.node.onclick = () => this.cardHandler(card);
     });
     this.cards.forEach(card => {
-      setTimeout(() => card.flipToBack(), 30000);
+      setTimeout(() => card.flipToBack(), 5000);
     });
   }
 
@@ -92,5 +94,13 @@ export default class CardsField extends Control {
     store.setTries(this.tries, this.correctTries);
     this.activeCard = undefined;
     this.isAnimation = false;
+  }
+
+  changeSize(): void {
+    if (settingsStore.getDifficulty() > 20) {
+      this.node.classList.add('small');
+    } else if (settingsStore.getDifficulty() > 15) {
+      this.node.classList.add('medium');
+    }
   }
 }

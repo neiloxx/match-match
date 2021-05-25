@@ -4,6 +4,10 @@ import './style.css';
 export default class FormField extends Control {
   checkbox: Control;
 
+  value = '';
+
+  warningBox: Control;
+
   constructor(
     parent: HTMLElement | null,
     className = '',
@@ -16,11 +20,14 @@ export default class FormField extends Control {
     this.node.setAttribute('placeholder', placeholder);
     this.node.setAttribute('required', '');
     this.checkbox = new Control(parent, 'div', 'form__checkbox');
+    this.warningBox = new Control(parent, 'div', 'form__warning');
     this.node.addEventListener('input', (event: Event) => {
       const input: HTMLInputElement | null = <HTMLInputElement>event.target;
       if (input.value && isValid(input.value)) {
+        this.value = input.value;
         this.setCorrect();
       } else {
+        this.value = input.value;
         this.setWrong();
       }
     });
@@ -29,13 +36,21 @@ export default class FormField extends Control {
   setParent(parent: HTMLElement) {
     super.setParent(parent);
     this.checkbox.setParent(parent);
+    this.warningBox.setParent(parent);
   }
 
   setCorrect() {
     this.checkbox.getNode().classList.add('correct');
+    this.warningBox.getNode().classList.remove('active');
   }
 
   setWrong() {
     this.checkbox.getNode().classList.remove('correct');
+    this.warningBox.getNode().textContent = 'You should enter valid data';
+    this.warningBox.getNode().classList.add('active');
+  }
+
+  getValue() {
+    return this.value;
   }
 }

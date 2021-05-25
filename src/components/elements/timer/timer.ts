@@ -1,27 +1,42 @@
 import Control from '../control';
-import './style.css';
-import LosePopup from '../../containers/state-popup/lose-popup';
 import store from '../../../store/game-store';
-import WinPopup from '../../containers/state-popup/win-popup';
+import './style.css';
 
 export default class Timer extends Control {
   intervalId: NodeJS.Timeout | null = null;
 
-  private startMinutes = 0;
+  startMinutes = 0;
 
-  private startSeconds = -29;
+  startSeconds = -4;
 
-  public spentTime: NodeJS.Timeout | undefined;
+  private readonly isWinner: () => boolean;
 
-  constructor(parent: HTMLElement | null, className = '') {
-    super(parent, 'div', className);
+  private readonly onWinCallback: () => void;
+
+  private readonly onLoseCallback: () => void;
+
+  constructor(
+    parent: HTMLElement | null,
+    className = '',
+    isWinner: () => boolean,
+    onWinCallback: () => void,
+    onLoseCallback: () => void,
+  ) {
+    super(parent, 'div', className, '', 'onTop');
+    this.isWinner = isWinner;
+    this.onWinCallback = onWinCallback;
+    this.onLoseCallback = onLoseCallback;
+    window.onhashchange = () => {
+      if (window.location.hash !== '#start') {
+        this.clear();
+      }
+    };
   }
 
-  // TODO: remove game logic in other class with methods start&stop game. There should be only the Timer;
   start() {
     if (!this.intervalId) {
       this.intervalId = setInterval(() => {
-        if (store.getQuantity() / 2 === store.getCorrectTries()) {
+        if (this.isWinner()) {
           this.stop();
         }
         if (this.startMinutes < 10) {
@@ -53,39 +68,20 @@ export default class Timer extends Control {
 
   clear() {
     if (this.intervalId) {
-      this.spentTime = this.intervalId;
       clearInterval(this.intervalId);
+      this.intervalId = null;
     }
   }
 
-  // TODO: remove game logic in other class
   stop() {
     store.setTime(this.startMinutes, this.startSeconds);
     if (this.intervalId) {
-      this.spentTime = this.intervalId;
       clearInterval(this.intervalId);
     }
-    if (store.getQuantity() / 2 === store.getCorrectTries()) {
-      const win = new WinPopup();
-      document.body.appendChild(win.node);
-      store.clear();
-      window.onhashchange = () => document.body.removeChild(win.node);
-    } else if (store.getQuantity() / 2 !== store.getCorrectTries()) {
-      const lose = new LosePopup();
-      const currentLocation = window.location;
-      document.body.appendChild(lose.node);
-      const btns = document.body.querySelectorAll('.link_popup');
-      btns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          if (currentLocation === window.location) {
-            this.intervalId = null;
-            document.body.removeChild(lose.node);
-            this.startMinutes = 0;
-            this.startSeconds = 0;
-            this.start();
-          } else document.body.removeChild(lose.node);
-        });
-      });
+    if (this.isWinner()) {
+      this.onWinCallback();
+    } else {
+      this.onLoseCallback();
     }
   }
 }

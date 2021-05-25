@@ -6,7 +6,7 @@ body {
   font-weight: 500;
   font-size: 2rem;
   line-height: 3rem;
-  letter-spacing: .015rem;
+  letter-spacing: 0.015rem;
   color: #1f1f1f;
 }
 
@@ -23,7 +23,7 @@ body {
   margin: 1.6rem;
   font-size: 1.4rem;
   line-height: 2rem;
-  letter-spacing: .025rem;
+  letter-spacing: 0.025rem;
   color: #666;
   display: flex;
 }
@@ -33,7 +33,7 @@ body {
   content: counter(grid__text);
   font-size: 2.4rem;
   line-height: 2.1rem;
-  letter-spacing: .025rem;
+  letter-spacing: 0.025rem;
   color: #fff;
   padding: 3% 4%;
   background-color: #2196f3;

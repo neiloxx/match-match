@@ -1,5 +1,6 @@
 import Control from '../control';
 import './style.css';
+import settingsStore from '../../../store/settings-store';
 
 const FLIP_CLASS = 'flipped';
 
@@ -15,6 +16,7 @@ export default class Card extends Control {
     this.front = new Control(this.node, 'div', 'card__front');
     this.back = new Control(this.node, 'div', 'card__back');
     this.front.getNode().style.backgroundImage = `url(${backImage})`;
+    this.changeSize();
   }
 
   flipToBack() {
@@ -34,5 +36,11 @@ export default class Card extends Control {
         once: true,
       });
     });
+  }
+
+  changeSize(): void {
+    if (settingsStore.getDifficulty() > 20) {
+      this.node.classList.add('small');
+    }
   }
 }

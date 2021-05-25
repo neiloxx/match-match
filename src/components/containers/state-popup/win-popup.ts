@@ -12,6 +12,7 @@ export default class WinPopup extends Control {
     super(null, 'div', 'state-popup');
     const time = store.getTime();
     const score = store.getScore();
+    localStorage.setItem('lastScore', score.toString());
     this.wrapper = new Wrapper(this.node, 'popup__wrapper', [
       new Paragraph(
         null,

@@ -1,3 +1,5 @@
+import settingsStore from './settings-store';
+
 class GameStore {
   seconds = 0;
 
@@ -7,7 +9,7 @@ class GameStore {
 
   correctTries = 0;
 
-  quantityCards = 12; // This number we should get from settings
+  quantityCards = settingsStore.getDifficulty(); // This number we should get from settings
 
   setTime(minutes: number, seconds: number) {
     this.seconds = minutes * 60 + seconds;
@@ -36,8 +38,10 @@ class GameStore {
 
   getScore() {
     const wrongTries = this.allTries - this.correctTries;
-    this.score = (this.allTries - wrongTries) * 100 - this.seconds * 10;
-    return this.score;
+    this.score =
+      ((this.allTries - wrongTries) * 100 - this.seconds * 10) *
+      Math.round(Math.sqrt(this.quantityCards));
+    return this.score >= 0 ? this.score : 0;
   }
 
   clear() {

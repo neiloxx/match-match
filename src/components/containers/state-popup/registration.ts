@@ -7,6 +7,7 @@ import Form from '../form/form';
 import Button from '../../elements/button/button';
 import { validateName, validateEmail } from '../../../utils/validators';
 import RegistrationStore from '../../../store/registration-store';
+import { userRepository } from '../../../repositories/userRepository';
 
 export default class Registration extends Control {
   wrapper: Control;
@@ -73,8 +74,23 @@ export default class Registration extends Control {
         RegistrationStore.isNameValid &&
         RegistrationStore.isSurNameValid
       ) {
-        onSubmit();
-        // TODO: add call to backend with form info
+        userRepository.upsertUser(
+          this.nameField.getValue(),
+          this.surnameField.getValue(),
+          this.emailField.getValue(),
+          null,
+          () => {
+            localStorage.setItem('currentUser', this.emailField.getValue());
+            const startLink = document.querySelector('.start-link');
+            const stopLink = document.querySelector('.stop-link');
+            const registrationLink =
+              document.querySelector('.registration-link');
+            registrationLink?.classList.add('unavailable');
+            startLink?.classList.add('available');
+            stopLink?.classList.add('available');
+            onSubmit();
+          },
+        );
       }
     };
     cancelBtn.getNode().onclick = () => {

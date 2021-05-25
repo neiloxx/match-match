@@ -1,0 +1,24 @@
+.settings__select,
+.settings__select-option {
+  width: 25.6rem;
+  height: 6rem;
+  border: none;
+  background-color: #ffffff;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  letter-spacing: 0.025rem;
+  padding-left: 1em;
+  cursor: pointer;
+}
+
+.settings__select:active {
+  outline: none;
+}
+
+.settings__select:focus-visible {
+  outline: none;
+}
+
+.settings__select-option {
+  background-color: transparent;
+}

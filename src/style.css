@@ -1,10 +1,13 @@
-* {;
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
-  font-size: 62.5%;
+}
+
+:root {
+  font-size: 10px;
 }
 
 #app {
@@ -20,14 +23,14 @@
 }
 
 .app {
-  padding: 3rem 1rem;
+  margin: 3rem 1rem 0 1rem;
   max-width: 100rem;
   width: 100%;
 }
 
 .main {
-  padding: 2.8rem 2.8rem 8.5rem 2.8rem;
+  padding: 2.8rem 2.8rem 0 2.8rem;
   background-color: #f2f2f2;
   border-radius: 1rem;
-  height: 80.2rem;
+  height: 88vh;
 }
