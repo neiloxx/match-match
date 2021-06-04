@@ -5,8 +5,11 @@ import { shuffleArray } from '../../../utils/array';
 import images from '../../../consts/images.json';
 import delay from '../../../shared/delay';
 import store from '../../../store/game-store';
+import settingsStore from '../../../store/settings-store';
 
 const FLIP_DELAY = 1000;
+const quantityCardsOnNormalDifficulty = 15;
+const quantityCardsOnHardDifficulty = 20;
 
 export default class CardsField extends Control {
   private cards: Array<Card> = [];
@@ -19,25 +22,21 @@ export default class CardsField extends Control {
 
   category: string;
 
-  tries = 0;
+  tries: number;
 
-  correctTries = 0;
+  correctTries: number;
 
-  public quantity = 12; // This number we should get from settings
+  public quantity = settingsStore.getDifficulty();
 
   constructor(parent: HTMLElement) {
     super(parent, 'div', 'card__field');
-    this.category = 'lotr';
+    this.category = settingsStore.getGameCards();
     this.images = images[this.category];
-    this.addCards();
+    this.tries = 0;
+    this.correctTries = 0;
   }
 
-  clear() {
-    this.cards = [];
-    this.node.innerHTML = '';
-  }
-
-  addCards() {
+  addCards(): void {
     for (let i = 1; i < this.quantity + 1; i++) {
       this.cards.push(
         new Card(
@@ -54,11 +53,14 @@ export default class CardsField extends Control {
       card.node.onclick = () => this.cardHandler(card);
     });
     this.cards.forEach(card => {
-      setTimeout(() => card.flipToBack(), 30000);
+      setTimeout(
+        () => card.flipToBack(),
+        Math.abs(store.preparingTime) + FLIP_DELAY,
+      );
     });
   }
 
-  private async cardHandler(card: Card) {
+  private async cardHandler(card: Card): Promise<void> {
     if (this.isAnimation) return;
     if (!card.isFlipped) return;
     this.isAnimation = true;
@@ -92,5 +94,15 @@ export default class CardsField extends Control {
     store.setTries(this.tries, this.correctTries);
     this.activeCard = undefined;
     this.isAnimation = false;
+  }
+
+  changeSize(): void {
+    if (settingsStore.getDifficulty() > quantityCardsOnHardDifficulty) {
+      this.node.classList.add('small');
+    } else if (
+      settingsStore.getDifficulty() > quantityCardsOnNormalDifficulty
+    ) {
+      this.node.classList.add('medium');
+    }
   }
 }

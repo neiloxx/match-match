@@ -22,14 +22,14 @@ export default class Control {
     this.node = el;
   }
 
-  setParent(parent: HTMLElement) {
+  setParent(parent: HTMLElement): void {
     if (!this.parent) {
       this.parent = parent;
       this.parent.appendChild(this.node);
     }
   }
 
-  getNode() {
+  public getNode(): HTMLElement {
     return this.node;
   }
 }

@@ -28,6 +28,19 @@
     "@typescript-eslint/indent": ["warn", 2, {
       "SwitchCase": 1
     }],
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "no-magic-numbers": "off",
+    "@typescript-eslint/no-magic-numbers": ["error",
+      {
+        "ignoreArrayIndexes": true,
+        "ignore": [-1, 0, 1, 2]
+      }
+    ],
     "import/prefer-default-export": "off",
     "no-param-reassign": ["error", {
       "props": false

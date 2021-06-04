@@ -1,3 +1,8 @@
+import settingsStore from './settings-store';
+
+const coefficient = 100;
+const secondCoefficient = 10;
+
 class GameStore {
   seconds = 0;
 
@@ -7,40 +12,44 @@ class GameStore {
 
   correctTries = 0;
 
-  quantityCards = 12; // This number we should get from settings
+  preparingTime: number;
 
-  setTime(minutes: number, seconds: number) {
-    this.seconds = minutes * 60 + seconds;
+  maxMinutesBeforeLose: number;
+
+  quantityCards = settingsStore.getDifficulty();
+
+  constructor() {
+    this.preparingTime = -29000;
+    this.maxMinutesBeforeLose = 10000;
   }
 
-  getTime() {
+  setTime(seconds: number): void {
+    this.seconds = Math.round(seconds);
+  }
+
+  getTime(): number {
     return this.seconds;
   }
 
-  setTries(allTries: number, correctTries: number) {
+  setTries(allTries: number, correctTries: number): void {
     this.allTries = allTries;
     this.correctTries = correctTries;
   }
 
-  setQuantity(value: number) {
-    this.quantityCards = value;
-  }
-
-  getQuantity() {
-    return this.quantityCards;
-  }
-
-  getCorrectTries() {
+  getCorrectTries(): number {
     return this.correctTries;
   }
 
-  getScore() {
+  getScore(): number {
     const wrongTries = this.allTries - this.correctTries;
-    this.score = (this.allTries - wrongTries) * 100 - this.seconds * 10;
-    return this.score;
+    this.score =
+      ((this.allTries - wrongTries) * coefficient -
+        this.seconds * secondCoefficient) *
+      Math.round(Math.sqrt(this.quantityCards));
+    return this.score >= 0 ? this.score : 0;
   }
 
-  clear() {
+  clear(): void {
     this.score = 0;
     this.correctTries = 0;
     this.allTries = 0;

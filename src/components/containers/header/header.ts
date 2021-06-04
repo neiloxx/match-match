@@ -4,6 +4,7 @@ import Nav from '../nav/nav';
 import Link from '../../elements/link/link';
 import Logo from '../../elements/logo/logo';
 import './style.css';
+import Img from '../../elements/img/img';
 
 export default class Header extends Control {
   logo: Control;
@@ -17,6 +18,8 @@ export default class Header extends Control {
   startLink: Control;
 
   stopLink: Control;
+
+  avatar: Img;
 
   constructor(parent: HTMLElement | null) {
     super(parent, 'header', 'header', '', 'onTop');
@@ -43,5 +46,14 @@ export default class Header extends Control {
     );
     this.startLink = new Link(this.node, '#start', 'link start-link', 'start');
     this.stopLink = new Link(this.node, '#about', 'link stop-link', 'stop');
+    this.avatar = new Img(this.node, 'header__avatar');
+    this.startLink.getNode().onclick = () => {
+      this.startLink.getNode().classList.remove('available');
+      this.stopLink.getNode().classList.add('available');
+    };
+    this.stopLink.getNode().onclick = () => {
+      this.startLink.getNode().classList.add('available');
+      this.stopLink.getNode().classList.remove('available');
+    };
   }
 }

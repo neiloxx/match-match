@@ -4,6 +4,8 @@ class RegistrationStore {
   isSurNameValid = false;
 
   isEmailValid = false;
+
+  avatar = '';
 }
 
 const store = new RegistrationStore();

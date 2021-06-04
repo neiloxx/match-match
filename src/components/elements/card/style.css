@@ -8,7 +8,7 @@
   box-shadow: 0 1px 5px 0 #00000085;
   perspective: 100rem;
   border-radius: 1rem;
-  transition: transform ease-in .2s;
+  transition: transform ease-in 0.2s;
 }
 
 .card:hover {
@@ -33,7 +33,7 @@
 
 .card__back {
   transform: rotateY(180deg);
-  background-image: url("../../../../public/assets/images/card-back.jpg");
+  background-image: url('../../../../public/assets/images/card-back.jpg');
 }
 
 .card.flipped .card__front {
@@ -45,7 +45,8 @@
 }
 
 .card.wrong {
-  filter: sepia(71%) saturate(250%) hue-rotate(314deg) brightness(88%) contrast(97%);
+  filter: sepia(71%) saturate(250%) hue-rotate(314deg) brightness(88%)
+    contrast(97%);
 }
 
 .card.wrong.flipped {
@@ -53,5 +54,11 @@
 }
 
 .card.right {
-  filter: sepia(97%) saturate(250%) hue-rotate(70deg) brightness(99%) contrast(95%);
+  filter: sepia(97%) saturate(250%) hue-rotate(70deg) brightness(99%)
+    contrast(95%);
+}
+
+.card.small {
+  max-width: 10.8rem;
+  max-height: 10.8rem;
 }

@@ -67,15 +67,15 @@
 }
 
 .list__item-link.about .link_image {
-  background-image: url("../../../assets/icons/question.svg");
+  background-image: url('../../../assets/icons/question.svg');
 }
 
 .list__item-link.score .link_image {
-  background-image: url("../../../assets/icons/star.svg");
+  background-image: url('../../../assets/icons/star.svg');
 }
 
 .list__item-link.settings .link_image {
-  background-image: url("../../../assets/icons/gear.svg");
+  background-image: url('../../../assets/icons/gear.svg');
 }
 
 .list__item-link:hover,
@@ -104,12 +104,23 @@
 }
 
 .registration-link {
+  display: flex;
+}
+
+.registration-link.unavailable {
   min-width: 13.5rem;
+  display: none;
 }
 
 .start-link,
 .stop-link {
   min-width: 5rem;
+  display: none;
+}
+
+.start-link.available,
+.stop-link.available {
+  display: flex;
 }
 
 .link:hover,
@@ -120,4 +131,17 @@
 
 .link:active {
   color: #ddd;
+}
+
+.header__avatar {
+  display: none;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header__avatar.active {
+  display: block;
 }
