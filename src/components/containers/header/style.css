@@ -132,3 +132,16 @@
 .link:active {
   color: #ddd;
 }
+
+.header__avatar {
+  display: none;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header__avatar.active {
+  display: block;
+}

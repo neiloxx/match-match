@@ -16,25 +16,19 @@ export default class DataBase {
       usersStore.createIndex('lastName', 'lastName');
       usersStore.createIndex('score', 'score');
       usersStore.createIndex('email', 'email');
-      const settingsStore = this.database.createObjectStore('settings', {
-        keyPath: 'id',
-        autoIncrement: true,
-      });
-    };
-    this.dbRequest.onsuccess = () => {
-      console.log('connection successful');
+      usersStore.createIndex('avatar', 'avatar');
     };
     this.dbRequest.onerror = () => {
-      console.log('error opening database');
+      throw new Error('error opening database');
     };
   }
 
   upsert(
     collectionName: string,
-    data: { [p: string]: string | number | null },
-  ) {
+    data: { [p: string]: string | number },
+  ): Promise<IDBValidKey> {
     return new Promise((resolve, reject) => {
-      let result: IDBValidKey | null = null;
+      let result: IDBValidKey;
       this.database = this.dbRequest.result;
       const transaction = this.database.transaction(
         collectionName,
@@ -54,9 +48,9 @@ export default class DataBase {
 
   getAll(
     collectionName: string,
-  ): Promise<Array<{ [key: string]: string | number | null }> | null> {
+  ): Promise<Array<{ [key: string]: string | number }>> {
     return new Promise((resolve, reject) => {
-      let result: Array<{ [key: string]: string | null }> | null = null;
+      let result: Array<{ [key: string]: string }>;
       this.database = this.dbRequest.result;
       const transaction = this.database.transaction(collectionName, 'readonly');
       const store = transaction.objectStore(collectionName);

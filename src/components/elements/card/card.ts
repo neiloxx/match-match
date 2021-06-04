@@ -3,6 +3,7 @@ import './style.css';
 import settingsStore from '../../../store/settings-store';
 
 const FLIP_CLASS = 'flipped';
+const maxCardsBeforeSmallSize = 20;
 
 export default class Card extends Control {
   front: Control;
@@ -19,12 +20,12 @@ export default class Card extends Control {
     this.changeSize();
   }
 
-  flipToBack() {
+  flipToBack(): Promise<void> {
     this.isFlipped = true;
     return this.flip(true);
   }
 
-  flipToFront() {
+  flipToFront(): Promise<void> {
     this.isFlipped = false;
     return this.flip();
   }
@@ -39,7 +40,7 @@ export default class Card extends Control {
   }
 
   changeSize(): void {
-    if (settingsStore.getDifficulty() > 20) {
+    if (settingsStore.getDifficulty() > maxCardsBeforeSmallSize) {
       this.node.classList.add('small');
     }
   }

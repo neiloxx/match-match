@@ -1,7 +1,9 @@
+const startDifficulty = 12;
+
 class SettingsStore {
   public gameCards = 'lotr';
 
-  public difficulty = 12;
+  public difficulty = startDifficulty;
 
   setGameCards(value: string): void {
     this.gameCards = value;

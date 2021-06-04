@@ -5,8 +5,6 @@ import settingsStore from '../../../store/settings-store';
 export default class Select extends Control {
   private optionsCards = ['lotr', 'games', 'animals'];
 
-  private optionsDifficulty = [12, 16, 36];
-
   constructor(
     parent: HTMLElement | null,
     className = '',

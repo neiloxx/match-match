@@ -33,24 +33,24 @@ export default class FormField extends Control {
     });
   }
 
-  setParent(parent: HTMLElement) {
+  setParent(parent: HTMLElement): void {
     super.setParent(parent);
     this.checkbox.setParent(parent);
     this.warningBox.setParent(parent);
   }
 
-  setCorrect() {
+  setCorrect(): void {
     this.checkbox.getNode().classList.add('correct');
     this.warningBox.getNode().classList.remove('active');
   }
 
-  setWrong() {
+  setWrong(): void {
     this.checkbox.getNode().classList.remove('correct');
     this.warningBox.getNode().textContent = 'You should enter valid data';
     this.warningBox.getNode().classList.add('active');
   }
 
-  getValue() {
+  getValue(): string {
     return this.value;
   }
 }

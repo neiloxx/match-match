@@ -23,14 +23,15 @@
 }
 
 .app {
-  margin: 3rem 1rem 0 1rem;
+  margin: 3rem 1rem 1rem 1rem;
   max-width: 100rem;
   width: 100%;
 }
 
 .main {
-  padding: 2.8rem 2.8rem 0 2.8rem;
+  padding: 1.8rem 2.8rem 0 2.8rem;
   background-color: #f2f2f2;
   border-radius: 1rem;
-  height: 88vh;
+  height: 83rem;
+  overflow: hidden;
 }
