@@ -33,7 +33,9 @@ export default class Game extends Control {
     document.body.appendChild(win.node);
     window.onhashchange = () => {
       this.timer.clear();
-      document.body.removeChild(win.node);
+      if (document.body.contains(win.node)) {
+        document.body.removeChild(win.node);
+      }
     };
   }
 
