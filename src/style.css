@@ -17,7 +17,8 @@
   background-color: #fff;
 }
 
-.header__wrapper {
+.header__wrapper,
+.footer__wrapper {
   width: 100%;
   background-color: #2196f3;
 }

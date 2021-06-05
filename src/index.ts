@@ -6,6 +6,8 @@ import Control from './components/elements/control';
 import './style.css';
 import Game from './pages/game/game';
 import Registration from './components/containers/state-popup/registration';
+import Wrapper from './components/elements/wrapper/wrapper';
+import Footer from './components/containers/footer/footer';
 
 class Application {
   wrapper: Control;
@@ -14,10 +16,16 @@ class Application {
 
   app: Control;
 
+  footerWrapper: Wrapper;
+
+  footer: Footer;
+
   constructor(parent: HTMLElement) {
     this.wrapper = new Control(parent, 'div', 'header__wrapper');
     this.header = new Header(document.querySelector('.header__wrapper'));
     this.app = new Control(parent, 'div', 'app');
+    this.footerWrapper = new Wrapper(parent, 'footer__wrapper', []);
+    this.footer = new Footer(this.footerWrapper.getNode());
   }
 }
 
